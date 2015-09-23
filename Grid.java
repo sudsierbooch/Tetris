@@ -23,6 +23,7 @@ public class Grid {
 	private Shape curShape;
 	private JButton [][] buttonBoard;
 	private Thread t = new Thread();
+	private KeyboardFocusManager manager;
 	
 	
 	
@@ -86,7 +87,7 @@ public class Grid {
 		boolBoard = new boolean[20][10];
 		buttonBoard = new JButton[20][10];
 		setUpButtons(g);
-		KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+		manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         manager.addKeyEventDispatcher(new MKeyListener());
 	}
 	
@@ -143,10 +144,33 @@ public class Grid {
 	//// Testing functionality of normal fall with multiple shapes
 	//////////////////////////////////////////////////////////////////////////
 	public void test(){
-		newPiece(randInt(0,7));
+		newPiece(1);
+		normalFall(curShape);
+		newPiece(1);
+		normalFall(curShape);
+		newPiece(1);
+		normalFall(curShape);
+		newPiece(1);
+		normalFall(curShape);
+		newPiece(1);
+		normalFall(curShape);
+		newPiece(1);
+		normalFall(curShape);
+		newPiece(1);
+		normalFall(curShape);
+		newPiece(1);
+		normalFall(curShape);
+		newPiece(1);
+		normalFall(curShape);
+		newPiece(1);
+		normalFall(curShape);
+		newPiece(1);
+		normalFall(curShape);
+		/*newPiece(randInt(0,7));
 		//Shape curShape = new Shape("long");
 		normalFall(curShape);
-		
+		newPiece(randInt(0,7));
+		normalFall(curShape);
 		//curShape = new Shape("backL");
 		newPiece(randInt(0,7));
 		normalFall(curShape);
@@ -174,6 +198,16 @@ public class Grid {
 		normalFall(curShape);
 		newPiece(randInt(0,7));
 		normalFall(curShape);
+		newPiece(randInt(0,7));
+		normalFall(curShape);
+		newPiece(randInt(0,7));
+		normalFall(curShape);
+		newPiece(randInt(0,7));
+		normalFall(curShape);
+		newPiece(randInt(0,7));
+		normalFall(curShape);
+		newPiece(randInt(0,7));
+		normalFall(curShape);*/
 	//	newPiece(randInt(0,7));
 	//	normalFall(curShape);
 	//	newPiece(randInt(0,7));
@@ -341,7 +375,7 @@ public class Grid {
 			
 			}else{
 					System.out.println("Space is free");
-					
+					//if(manager.){
 					//Space is on the grid and not locked set old spaces to 0
 					intBoard[curPos[0]][curPos[1]] = 0;
 					intBoard[curPos[2]][curPos[3]] = 0;
@@ -383,10 +417,16 @@ public class Grid {
 		boolBoard[curPos[2]][curPos[3]] = true;
 		boolBoard[curPos[4]][curPos[5]] = true;
 		boolBoard[curPos[6]][curPos[7]] = true;
+		intBoard[curPos[0]][curPos[1]] = s.getColor();
+		intBoard[curPos[2]][curPos[3]] = s.getColor();
+		intBoard[curPos[4]][curPos[5]] = s.getColor();
+		intBoard[curPos[6]][curPos[7]] = s.getColor();
+		while(adjustBoard()){
 		adjustBoard();
+		}
 		//print out the new grid
 		printGrid();
-						
+			
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////
@@ -545,14 +585,14 @@ public class Grid {
 	}
 	
 	public void moveDownPiece(Shape s){
-		if((!boolBoard[curPos[0]+1][curPos[1]]&&!boolBoard[curPos[2]+1][curPos[3]]&&!boolBoard[curPos[4]+1][curPos[5]]&&!boolBoard[curPos[6]+1][curPos[7]])&&!bottomCheck()){
+	//	if((!boolBoard[curPos[0]+1][curPos[1]]&&!boolBoard[curPos[2]+1][curPos[3]]&&!boolBoard[curPos[4]+1][curPos[5]]&&!boolBoard[curPos[6]+1][curPos[7]])&&!bottomCheck()){
 			intBoard[curPos[0]][curPos[1]] = 0;
 			intBoard[curPos[2]][curPos[3]] = 0;
 			intBoard[curPos[4]][curPos[5]] = 0;
 			intBoard[curPos[6]][curPos[7]] = 0;
 			s.moveDown(curPos);
 			update(s);
-		}
+		//}
 	}
 	
 	public void rotate(Shape s){
